@@ -52,15 +52,6 @@ apt-get install \
       postgresql-server-dev-9.5 \
       ruby
 
-# setup postgres
-passwd postgres   # choose a password for user postgres
-# now alter yourself as superuser 
-su - postgres
-psql -c "alter user postgres with password 'postgres';"
-createuser root --superuser
-createdb root  
-exit
-
 echo ""
 echo "done with postgres"
 echo "++++++++++++++++++"
@@ -154,7 +145,7 @@ echo "++++++++++++++++++"
 echo ""
 
 echo ""
-echo "Installing Pyenv"
+echo "Preparing Installing Pyenv"
 echo "++++++++++++++++++"
 echo ""
 apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
@@ -166,27 +157,9 @@ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 # for lxml library
 apt-get install libxml2-dev libxslt1-dev
-echo "Will Installing Python now: need to create new shell"
+echo "you need to execute python.sh next"
 echo "Bye Bye!"
 echo "========================"
-exec $SHELL
-echo ""
-echo "Installing Python 2.7.8"
-echo "========================"
-echo ""
-pyenv install 2.7.8
-echo ""
-echo "Installing Python 3.4.0 and packages"
-echo "===================================="
-echo ""
-pyenv install 3.4.0
-pyenv shell 3.4.0
-pip install argparse requests lxml psycopg2 configparser cython\
-    numpy sqlalchemy folium bs4
-echo ""
-echo "Done Installing Pyenv"
-echo "++++++++++++++++++"
-echo ""
 
 
 
