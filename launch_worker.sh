@@ -4,6 +4,7 @@
 # and that you are inside the root of that repo right now
 
 # task 2: install software
+declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core)
 for i in "${workers[@]}"
 do
 	echo "install on worker $i"
