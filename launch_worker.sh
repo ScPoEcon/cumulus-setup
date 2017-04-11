@@ -10,14 +10,15 @@ for i in "${workers[@]}"
 do
 	echo "setting up SSH on worker $i"
 	cat ~/.ssh/id_rsa.pub | ssh root@"$i" 'cat >> .ssh/authorized_keys'
+	echo "done."
 done
 
 # task 2: install software
 for i in "${workers[@]}"
 do
 	echo "install on worker $i"
-	scp install.sh root@"$i"
-	ssh $i 'chmod 755 install.sh'
+	scp install.sh root@"$i":~
+	ssh $i 'chmod 755 ~/install.sh'
 	ssh $i './install.sh'
 	ssh $i 'rm ./install.sh'
 	echo "done installing on worker $i"
