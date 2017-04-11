@@ -5,7 +5,7 @@
 
 # task 1: setup SSH between login and worker nodes
 
-workers = (vm3-8core, vm4-8core, vm5-8core, vm6-8core)
+workers = (vm3-8core vm4-8core vm5-8core vm6-8core)
 for i in "${workers[@]}"
 do
 	echo "setting up SSH on worker $i"
