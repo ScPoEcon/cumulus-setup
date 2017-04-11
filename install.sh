@@ -137,7 +137,7 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
 				Pkg.clone("https://github.com/floswald/MOpt.jl")' | \
-	julia
+	/root/apps/julia-0.5/bin/julia
 
 echo ""
 echo "done Installing julia"
