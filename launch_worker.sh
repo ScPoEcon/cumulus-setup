@@ -8,7 +8,7 @@ declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core)
 for i in "${workers[@]}"
 do
 	echo "install on worker $i"
-	scp install.sh root@"$i":~
+	scp install.sh "$i":~
 	ssh $i 'chmod 755 ~/install.sh'
 	ssh $i './install.sh'
 	ssh $i 'rm ./install.sh'

@@ -31,13 +31,11 @@ echo 'if [ -n "$BASH_VERSION" ]; then
     fi' >> ~/.profile
 
 echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
-cat prompt.sh >> ~/.bashrc
 echo "alias ls='ls --color=auto'"  >> ~/.bashrc
 
 echo "adding ~/local to your PATH"
 mkdir -p $HOME/local/bin
 echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
-exec $SHELL
 
 
 apt-get update
@@ -168,6 +166,9 @@ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 # for lxml library
 apt-get install libxml2-dev libxslt1-dev
+echo "Will Installing Python now: need to create new shell"
+echo "Bye Bye!"
+echo "========================"
 exec $SHELL
 echo ""
 echo "Installing Python 2.7.8"
