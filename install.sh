@@ -133,7 +133,8 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				"NLopt",
 				"ClusterManagers",
 				"PyPlot",
-				"Query"]);
+				"Query",
+                "DocOpt"]);
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
 				Pkg.clone("https://github.com/floswald/MOpt.jl")' | \
