@@ -7,7 +7,7 @@ Cumulus is the virtual datacenter of USPC (Universite Sorbonne Paris Cite). Thes
 
 Easy:  
 
-* Write me an email explaining in 1 sentence why you need this service. This is more to understand whether it could be useful for you, rather than to restrict access to it.
+* Write me an email explaining in 1 sentence why you need this service. This is more to understand whether it could be useful for you, rather than to restrict access to it. Access is granted exclusively to members of the Department of Economics at SciencesPo Paris.
 * I'll send you an email with your password. 
 * Go to [https://cumulus.parisdescartes.fr](https://cumulus.parisdescartes.fr)
 	* **immediately change your password**
