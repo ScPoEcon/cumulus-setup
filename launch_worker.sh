@@ -9,7 +9,6 @@ for i in "${workers[@]}"
 do
 	echo "install on worker $i"
 	scp install.sh "$i":~
-	ssh $i 'chmod 755 ~/install.sh'
 	ssh $i './install.sh'
 	ssh $i 'rm ./install.sh'
 	echo "done installing on worker $i"

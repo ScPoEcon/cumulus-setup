@@ -5,57 +5,80 @@
 # it needs to be run on each newly created virtual machine.
 
 # how to use:
-# scp install.sh cumulus:~   # copy this to cumulus
-# ssh cumulus 'chmod 755 install.sh'   # allow execution of the script
-# ssh cumulus './install.sh'   # execution the script
-# you need to say yes (Y) a couple of times
+# manually install git and clone this repo. execute those commands:
 
-# we are always root on this system, so no sudo required
-# you need to first manually install git:
+# apt-get update
+# apt install git
+# cd
+# mkdir git
+# cd git
+# git clone git@github.com:floswald/cumulus-setup.git
+# cd cumulus-setup
+# ./install.sh
+
+# you need to say yes (Y) a couple of times during the process
+
 
 echo ""
 echo "start of install script"
 echo "+++++++++++++++++++++++"
 echo ""
+echo "This script will install recent versions of:"
+echo "  - Gnu Compiler Collection (GCC)"
+echo "  - R + packages"
+echo "  - julia + packages"
+echo ""
+echo "It will prepare the installation of:"
+echo "  - Pyenv (Python environment for multiple python versions"
+echo "    you will have to finish installation by running a second"
+echo "    script: python.sh"
+echo ""
+echo "Additional install scripts:"
+echo "  - python.sh: installs python 2.7 and python 3.4"
+echo "  - ssh.sh: setup passwordless ssh on a set of VMs"
+echo "  - postgres.sh: install PostgreSQL"
+echo "  - prompt.sh: install fancy git-aware shell "
+echo ""
+echo ""
+echo "NOTICE:"
+echo "you need to say yes (Y) a couple of times during the process"
+echo ""
+echo ""
 
+sleep 4
 
 echo ""
-echo "First will setup your .bashrc"
+echo "First will setup your ~/.bashrc"
 echo "+++++++++++++++++++++++"
 echo ""
-echo 'if [ -n "$BASH_VERSION" ]; then 
-    # include .bashrc if it exists 
-    if [ -f "$HOME/.bashrc" ]; then 
-        . "$HOME/.bashrc" 
-    fi 
-    fi' >> ~/.profile
+# echo 'if [ -n "$BASH_VERSION" ]; then 
+#     # include .bashrc if it exists 
+#     if [ -f "$HOME/.bashrc" ]; then 
+#         . "$HOME/.bashrc" 
+#     fi 
+#     fi' >> ~/.profile
 
-echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
-echo "alias ls='ls --color=auto'"  >> ~/.bashrc
+# echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
+# echo "alias ls='ls --color=auto'"  >> ~/.bashrc
 
 echo "adding ~/local to your PATH"
 mkdir -p $HOME/local/bin
 echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
 
+sleep 3
 
 apt-get update
 apt install git
 # compilers	
 apt install gcc
 
-# install postgresql
-apt-get install \
-      build-essential \
-      postgis \
-      postgresql \
-      postgresql-client \
-      postgresql-server-dev-9.5 \
-      ruby
-
 echo ""
-echo "done with postgres"
+echo "done installing GCC"
 echo "++++++++++++++++++"
 echo ""
+
+sleep 2
+
 
 echo ""
 echo "Installing R"
@@ -97,6 +120,9 @@ echo ""
 echo "done Installing R"
 echo "++++++++++++++++++"
 echo ""
+
+sleep 3
+
 
 echo ""
 echo "Installing julia and packages"
@@ -144,6 +170,8 @@ echo ""
 echo "done Installing julia"
 echo "++++++++++++++++++"
 echo ""
+
+sleep 3
 
 echo ""
 echo "Preparing Installing Pyenv"

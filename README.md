@@ -83,14 +83,14 @@ cat ~/.ssh/id_rsa.pub | ssh root@10.20.35.87 'cat >> .ssh/authorized_keys'   # 1
 you need to create or edit the file `~/.ssh/config`:
 
 ```bash
-Host cum-login
+Host cumlogin
     User root
     Hostname brome.lab.parisdescartes.fr
     Port 2222
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_rsa.pub
 
-Host cum
+Host cumulus
 	User root
 	HostName xx.xx.xx.x  # IP of your VM!
 	PreferredAuthentications publickey
@@ -98,10 +98,10 @@ Host cum
 	ProxyCommand ssh cum-login nc %h %p
 ```
 
-Now if you do `ssh cum` on your computer it takes you directly to your compute node, hopping over the login:
+Now if you do `ssh cumulus` on your computer it takes you directly to your compute node, hopping over the login:
 
 ```bash
-➜  ~ ssh cum
+➜  ~ ssh cumulus
 
 **************************************************
 
@@ -117,7 +117,7 @@ Now if you do `ssh cum` on your computer it takes you directly to your compute n
 
 * There is NO software installed on this node.
 * You should ONLY use it to connect to your compute nodes.
-* i.e. you now want to type `ssh root@IP-of-your-vm`
+* i.e. you now want to type `ssh your_user@IP-of-your-vm`
 * questions: florian.oswald@sciencespo.fr
 
 
@@ -136,5 +136,5 @@ root@vm2:~$
 
 ## Installing Software
 
-To be done.
-
+* `ssh` to your VM (**NOT** to the login node!!!!)
+* follow instructions contained in `install.sh` in this repository.
