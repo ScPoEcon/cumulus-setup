@@ -51,15 +51,17 @@ echo ""
 echo "First will setup your ~/.bashrc"
 echo "+++++++++++++++++++++++"
 echo ""
-# echo 'if [ -n "$BASH_VERSION" ]; then 
-#     # include .bashrc if it exists 
-#     if [ -f "$HOME/.bashrc" ]; then 
-#         . "$HOME/.bashrc" 
-#     fi 
-#     fi' >> ~/.profile
+if [ $(id -u) -eq 0 ]; then
+    echo 'if [ -n "$BASH_VERSION" ]; then 
+        # include .bashrc if it exists 
+        if [ -f "$HOME/.bashrc" ]; then 
+            . "$HOME/.bashrc" 
+        fi 
+        fi' >> ~/.profile
 
-# echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
-# echo "alias ls='ls --color=auto'"  >> ~/.bashrc
+    echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
+    echo "alias ls='ls --color=auto'"  >> ~/.bashrc
+fi
 
 echo "adding ~/local to your PATH"
 mkdir -p $HOME/local/bin
@@ -129,10 +131,11 @@ echo "Installing julia and packages"
 echo "+++++++++++++++++++++++++++++"
 echo ""
 # get julia
+cd
 wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz
 mkdir -p apps/julia-0.5
 tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C apps/julia-0.5 --strip-components 1
-ln -s /root/apps/julia-0.5/bin/julia /root/local/bin/julia 
+ln -s $HOME/apps/julia-0.5/bin/julia /root/local/bin/julia 
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
                 "FileIO",
                 "DataFrames",
@@ -164,7 +167,7 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
 				Pkg.clone("https://github.com/floswald/MOpt.jl")' | \
-	/root/apps/julia-0.5/bin/julia
+	$HOME/apps/julia-0.5/bin/julia
 
 echo ""
 echo "done Installing julia"
