@@ -136,19 +136,5 @@ root@vm2:~$
 
 ## Installing Software
 
-1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command:
-	```bash
-	ssh root@"IP_of_my_VM"
-	```
-	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above). 
-1. To start installing software, enter the following lines in the terminal:
-	```bash
-	cd
-	mkdir git
-	cd git
-	apt get install git
-	git clone https://github.com/floswald/cumulus-setup.git 
-	cd cumulus-setup
-	./install.sh
-	```
-	You will be asked to enter 'Y' several times. When the installation is done, you can check that everything went fine by simply entering 'python' in the terminal.
+* `ssh` to your VM (**NOT** to the login node!!!!)
+* follow instructions contained in `install.sh` in this repository.
