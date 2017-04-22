@@ -138,7 +138,7 @@ root@vm2:~$
 
 1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command:
 	```bash
-	ssh root@"IP_of_my_VM"
+	ssh root@IP_of_my_VM
 	```
 	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above). 
 1. To start installing software, enter the following lines in the terminal:
