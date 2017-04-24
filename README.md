@@ -1,25 +1,46 @@
 
 # Cumulus Setup
 
-**What is Cumulus**? This is the virtual datacenter of [USPC (Universite Sorbonne Paris Cite)](http://uspc.fr). The dept of Economics has access to this resource.  
+**What is Cumulus**? This is the virtual datacenter of [USPC (Universite Sorbonne Paris Cite)](http://uspc.fr). The dept of Economics at ScPo has got access to this resource. The official help site is [here](https://cumulus.parisdescartes.fr/help/).
 
-As is custom in many datacenters, you are provided with an **empty** computer. There is nothing but a operating system on it.  
+These instructions aim at setting up your account and letting you connect to your Virtual Machines (VMs). The repository also contains several scripts which help installing your software.
 
-These instructions aim at setting up your account and letting you connect to your VMs. The repository also contains several scripts which help installing your software.
+## Technical Specifications
 
-## Type of Users
+You can choose machines of several sizes. The most powerful machine is
+
+* Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz
+* 8 cores
+* 8 GB ram  
+* There is a very large amount of disk storage space available.
+* Given that each VM has an IP address, you can build your own cluster (i.e. you can connect machines together to form a large number of workers in a master-worker setup)  
+
+
+## Potential Uses of this System
+
+Any kind of computation-heavy task, like:
+
+* High throughput computing 
+* Parallel computations
+* Monte Carlo experiments
+* Solving and estimating large structural models
+
+This is not a very good system if you want to load a very large dataset into memory to perform analysis on it, given that you only get 8GB per machine.
+
+
+## Types of Users
 
 There are 2 possible ways to use this system:
 
 1. **Power User**: you are able to manage your VM on your own, i.e. you are the *owner* of the VM. This means you have to install everything yourself. I will provide only minimal assistance to power users. 
-2. **Normal User**: I create a user account on a VM for you and install all software in `install.sh`. 
-	* I create a unix ubuntu 16 box for you. 
-	* I cannot guarantee any level of assistance. I will run my install script for you, but after that, you are on your own. sorry. :-(
-	* If you want another OS (windows), you will have to declare yourself a power user.
+2. **Normal User**: I create a user account on a VM for you and install all software in the script `install.sh` contained within this repository: 
+	* I create a unix ubuntu 16 VM for you. 
+	* I cannot guarantee any level of assistance. I will run the install script for you, but after that, you are on your own. sorry. :-(
+	* If you want another OS (e.g. windows), you will have to declare yourself a power user, as I cannot provide any assistance with that.
 
 ### Available Software
 
-As of now, I can install for you:
+As of now, I install for you:
 
 * Gnu Compiler Collection (GCC)
 * Julia 
@@ -27,7 +48,7 @@ As of now, I can install for you:
 * R
 * PostgreSQL  
 
-In principle you can install anything you want. Notice that you will need an appropriate license for commercial software like matlab or stata. I will **not** provide assistance with installation of commercial software.
+In principle you can install anything you want. Notice that you will need an appropriate license for commercial software like `matlab` or `stata`. I will **not** provide assistance with installation of commercial software.
 
 
 ## Getting an Account
@@ -162,11 +183,14 @@ root@vm2:~$
 
 ## Installing Software (power users)
 
-1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command:
+1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command (if you have not set up the hopping as above)
+
 	```bash
 	ssh root@IP_of_my_VM
 	```
+
 	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above). 
+
 1. To start installing software, enter the following lines in the terminal:
 	```bash
 	cd
