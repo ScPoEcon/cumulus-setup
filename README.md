@@ -36,6 +36,7 @@ It is essential that you follow **each** of those steps:
 
 * On your cumulus dashboard, you should see your running machine now. Click on the name of the VM to open it.
 * Click on the little blue screen symbol to open a popup window with a console on that machine.
+	* **Caution**: This console has an `AZERTY` (i.e. *French*) keyboard.
 * login as `root`.
 * you are prompted to choose a password. Do so.
 * That's it. you are now the admin of that VM. You can install software and use it for your work.
