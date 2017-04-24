@@ -23,6 +23,7 @@ for i in "${workers[@]}"
 do
 	echo "on worker $i"
 	ssh root@"$i" apt install nfs-common
-	ssh root@"$i" mkdir -p git && mount 10.20.35.5:/root/git /root/git
+	ssh root@"$i" mkdir -p git
+	ssh root@"$i" mount 10.20.35.5:/root/git /root/git
 	echo "done."
 done
