@@ -2,10 +2,10 @@
 # run on master
 apt install nfs-kernel-server
 # this will export the directory /root/git to all nodes listed
-echo -e "/root/git 10.20.35.6(sync)  
-/root/git 10.20.35.7(sync) 
-/root/git 10.20.35.8(sync)  
-/root/git 10.20.35.9(sync)" | \
+echo -e "/root/git 10.20.35.6(sync,subtree_check)  
+/root/git 10.20.35.7(sync,subtree_check) 
+/root/git 10.20.35.8(sync,subtree_check)  
+/root/git 10.20.35.9(sync,subtree_check)" | \
 cat >> /etc/exports
 
 exportfs -a
@@ -23,6 +23,6 @@ for i in "${workers[@]}"
 do
 	echo "on worker $i"
 	ssh root@"$i" apt install nfs-common
-	ssh root@"$i" mount 10.20.35.5:/root/git /root/git
+	ssh root@"$i" mkdir -p git && mount 10.20.35.5:/root/git /root/git
 	echo "done."
 done
