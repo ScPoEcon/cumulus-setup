@@ -93,10 +93,10 @@ Host cumlogin
 
 Host cumulus
 	User root
-	HostName xx.xx.xx.x  # IP of your VM!
+	HostName xx.xx.xx.x  # put IP of your VM and erase this comment!
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_rsa.pub
-	ProxyCommand ssh cum-login nc %h %p
+	ProxyCommand ssh cumlogin nc %h %p
 ```
 
 Now if you do `ssh cumulus` on your computer it takes you directly to your compute node, hopping over the login:
