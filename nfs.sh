@@ -50,9 +50,7 @@ do
 		mkdir -p /apps
 		mount 10.20.35.11:/apps /apps
 		echo "done. "
-	EOF
+EOF
 	echo "done. rebooting $i"
 	ssh root@"$i" reboot
 done
-
-
