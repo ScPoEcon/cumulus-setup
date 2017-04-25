@@ -68,6 +68,7 @@ sleep 3
 apt-get update
 apt install git
 apt install htop
+apt-get install hdf5-tools
 # compilers	
 apt install gcc
 apt install python
@@ -132,7 +133,7 @@ echo ""
 wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz
 mkdir -p /apps/julia-0.5
 tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C /apps/julia-0.5 --strip-components 1
-ln -s /apps/julia-0.5/bin/julia /root/local/bin/julia 
+ln -s /apps/julia-0.5/bin/julia /usr/local/bin/julia 
 rm julia-0.5.1-linux-x86_64.tar.gz
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
                 "FileIO",
