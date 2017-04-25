@@ -4,7 +4,7 @@ function parse_git_branch() {
 	if [ ! "${BRANCH}" == "" ]
 	then
 		STAT=`parse_git_dirty`
-		echo "[${BRANCH}${STAT}]"
+		echo "git:(${BRANCH}${STAT})"
 	else
 		echo ""
 	fi
@@ -45,4 +45,5 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\[\e[31;43m\]\u\[\e[m\]\[\e[31;43m\]@\[\e[m\]\[\e[31;43m\]\h\[\e[m\]\[\e[31;43m\]:\[\e[m\]\[\e[31;43m\]\W\[\e[m\]\[\e[36;44m\]\`parse_git_branch\`\[\e[m\]> "
+
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\e[31;00m\] \`parse_git_branch\`\[\e[m\] "
