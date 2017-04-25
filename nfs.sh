@@ -7,40 +7,12 @@
 
 # run on master
 apt install nfs-kernel-server
-# this will export the directory /root/git to all nodes listed
+# this will export the directory /root to all nodes listed
 rm -rf /etc/exports
-echo -e "/root/.julia 10.20.35.6(sync,no_subtree_check,no_root_squash)  
-/root./julia 10.20.35.7(sync,no_subtree_check,no_root_squash) 
-/root./julia 10.20.35.8(sync,no_subtree_check,no_root_squash)  
-/root./julia 10.20.35.12(sync,no_subtree_check,no_root_squash) 
-/root./julia 10.20.35.13(sync,no_subtree_check,no_root_squash) 
-/root./julia 10.20.35.14(sync,no_subtree_check,no_root_squash) 
-/root./julia 10.20.35.15(sync,no_subtree_check,no_root_squash) 
-/root./julia 10.20.35.16(sync,no_subtree_check,no_root_squash) 
-/root/git 10.20.35.6(sync,no_subtree_check,no_root_squash)  
-/root/git 10.20.35.7(sync,no_subtree_check,no_root_squash) 
-/root/git 10.20.35.8(sync,no_subtree_check,no_root_squash)  
-/root/git 10.20.35.12(sync,no_subtree_check,no_root_squash)
-/root/git 10.20.35.13(sync,no_subtree_check,no_root_squash)
-/root/git 10.20.35.14(sync,no_subtree_check,no_root_squash)
-/root/git 10.20.35.15(sync,no_subtree_check,no_root_squash)
-/root/git 10.20.35.16(sync,no_subtree_check,no_root_squash)
-/apps 10.20.35.6(sync,no_subtree_check,no_root_squash)  
-/apps 10.20.35.7(sync,no_subtree_check,no_root_squash) 
-/apps 10.20.35.8(sync,no_subtree_check,no_root_squash)  
-/apps 10.20.35.12(sync,no_subtree_check,no_root_squash)
-/apps 10.20.35.13(sync,no_subtree_check,no_root_squash)
-/apps 10.20.35.14(sync,no_subtree_check,no_root_squash)
-/apps 10.20.35.15(sync,no_subtree_check,no_root_squash)
-/apps 10.20.35.16(sync,no_subtree_check,no_root_squash)
-/usr 10.20.35.6(sync,no_subtree_check,no_root_squash)  
-/usr 10.20.35.7(sync,no_subtree_check,no_root_squash) 
-/usr 10.20.35.8(sync,no_subtree_check,no_root_squash)  
-/usr 10.20.35.12(sync,no_subtree_check,no_root_squash)
-/usr 10.20.35.13(sync,no_subtree_check,no_root_squash)
-/usr 10.20.35.14(sync,no_subtree_check,no_root_squash)
-/usr 10.20.35.15(sync,no_subtree_check,no_root_squash)
-/usr 10.20.35.16(sync,no_subtree_check,no_root_squash)" | \
+echo -e "
+/root      10.20.35.6/16.16.16.0(rw,sync,no_root_squash)
+/usr/local 10.20.35.6/16.16.16.0(ro,sync,no_root_squash)
+/apps      10.20.35.6/16.16.16.0(ro,sync,no_root_squash)" | \
 cat >> /etc/exports
 
 exportfs -a
@@ -62,11 +34,15 @@ do
 	# ssh root@"$i" umount /root/git && umount /root/.julia
 	ssh root@"$i" << EOF
 		echo "mounting manually now"
-		mount 10.20.35.11:/root/.julia /root/.julia
-		mount 10.20.35.11:/usr /usr
+		mount 10.20.35.11:/root /root
+		mount 10.20.35.11:/usr/local /usr/local
 		mkdir -p /apps
 		mount 10.20.35.11:/apps /apps
 		echo "done. "
+		echo "adding to /etc/ftabs"
+		echo "10.20.35.11:/root /root nfs rw,auto 0 0" | cat >> /etc/fstab
+		echo "10.20.35.11:/usr/local /usr/local nfs rw,auto 0 0" | cat >> /etc/fstab
+		echo "10.20.35.11:/apps /apps nfs rw,auto 0 0" | cat >> /etc/fstab
 EOF
 	# echo "done. rebooting $i"
 	# ssh root@"$i" reboot

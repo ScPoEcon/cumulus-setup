@@ -78,7 +78,11 @@ apt-get install hdf5-tools
 apt install gcc
 apt install python
 apt-get install autojump
-echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
+
+
+echo 'if [ "$(hostname)" == "master" ]; then
+   . /usr/share/autojump/autojump.sh
+fi' >> ~/.bashrc
 
 echo ""
 echo "done installing GCC"
