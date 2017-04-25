@@ -8,14 +8,10 @@
 # run on master
 apt install nfs-kernel-server
 # this will export the directory /root/git to all nodes listed
-echo -e "/root/git 10.20.35.6(sync,no_subtree_check)  
-/root/git 10.20.35.7(sync,no_subtree_check) 
-/root/git 10.20.35.8(sync,no_subtree_check)  
-/root/git 10.20.35.9(sync,no_subtree_check) 
-/root/.julia 10.20.35.6(sync,no_subtree_check)  
-/root/.julia 10.20.35.7(sync,no_subtree_check) 
-/root/.julia 10.20.35.8(sync,no_subtree_check)  
-/root/.julia 10.20.35.9(sync,no_subtree_check)
+echo -e "/root 10.20.35.6(sync,no_subtree_check)  
+/root 10.20.35.7(sync,no_subtree_check) 
+/root 10.20.35.8(sync,no_subtree_check)  
+/root 10.20.35.9(sync,no_subtree_check) 
 /usr 10.20.35.6(sync,no_subtree_check)  
 /usr 10.20.35.7(sync,no_subtree_check) 
 /usr 10.20.35.8(sync,no_subtree_check)  
