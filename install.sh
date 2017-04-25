@@ -2,7 +2,7 @@
 # copyright 2017 florian.oswald@sciencespo.fr
 
 # this script installs software 
-# it needs to be run on each newly created virtual machine.
+# it needs to be run on your master node
 
 # how to use:
 # manually install git and clone this repo. execute those commands:
@@ -17,6 +17,11 @@
 # ./install.sh
 
 # you need to say yes (Y) a couple of times during the process
+
+## Sequence of scripts:
+# 1. install.sh
+# 2. ssh.sh
+# 3. nfs.sh
 
 
 echo ""
@@ -72,6 +77,8 @@ apt-get install hdf5-tools
 # compilers	
 apt install gcc
 apt install python
+apt-get install autojump
+echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 echo ""
 echo "done installing GCC"
