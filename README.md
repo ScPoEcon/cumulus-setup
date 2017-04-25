@@ -13,10 +13,9 @@ You can choose machines of several sizes. The most powerful machine is
 * 8 cores
 * 8 GB ram  
 * There is a very large amount of disk storage space available.
-* Given that each VM has an IP address, you can build your own cluster (i.e. you can connect machines together to form a large number of workers in a master-worker setup)  
+* Given that each VM has an IP address, you can build your own cluster (i.e. you can connect machines together to form a large number of workers in a master-worker setup)
 
-
-## Potential Uses of this System
+## Potential Uses of this system
 
 Any kind of computation-heavy task, like:
 
@@ -181,7 +180,7 @@ Last login: Wed Apr 19 12:01:27 2017 from 10.20.35.2
 root@vm2:~$ 
 ```
 
-## Installing Software (power users)
+## Installing Software (power users only)
 
 1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command (if you have not set up the hopping as above)
 
