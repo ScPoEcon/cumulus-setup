@@ -38,7 +38,7 @@ echo "  - Pyenv (Python environment for multiple python versions"
 echo "    you will have to finish installation by running a second"
 echo "    script: python.sh"
 echo ""
-echo "Additional install scripts:"
+echo "Additional install scripts in this repo:"
 echo "  - python.sh: installs python 2.7 and python 3.4"
 echo "  - ssh.sh: setup passwordless ssh on a set of VMs"
 echo "  - postgres.sh: install PostgreSQL"
@@ -49,6 +49,17 @@ echo "NOTICE:"
 echo "you need to say yes (Y) a couple of times during the process"
 echo ""
 echo ""
+
+
+# we want to share /root across all compute nodes.
+# we will not sure any build tools on the compute nodes.
+# only apps will be shared (only julia for now)
+# can add more apps by manually building and placing into /apps here on the master
+# to make sure this works, put the master's key in it's own authorized list:
+# 1. ssh master && cat id_rsa.pub >> authorized_keys
+# 
+
+# 2. install stuff
 
 sleep 4
 
@@ -64,9 +75,17 @@ if [ $(id -u) -eq 0 ]; then
         fi 
         fi' >> ~/.profile
 
-    echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
+    # echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> ~/.bashrc
     echo "alias ls='ls --color=auto'"  >> ~/.bashrc
 fi
+
+# setup a bin at user level
+mkdir -p ~/local/bin
+echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
+
+# get a nicer prompt
+cat prompt.sh >> ~/.bashrc
+
 
 sleep 3
 
@@ -90,6 +109,10 @@ echo "++++++++++++++++++"
 echo ""
 
 sleep 2
+
+apt install python
+apt-get install autojump
+echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 
 echo ""
@@ -144,7 +167,7 @@ echo ""
 wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz
 mkdir -p /apps/julia-0.5
 tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C /apps/julia-0.5 --strip-components 1
-ln -s /apps/julia-0.5/bin/julia /usr/local/bin/julia 
+ln -s /apps/julia-0.5/bin/julia $HOME/local/bin/julia 
 rm julia-0.5.1-linux-x86_64.tar.gz
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
                 "FileIO",
@@ -186,9 +209,13 @@ echo ""
 
 sleep 3
 
-echo "Done!"
+echo "Done installing!"
 echo "========================"
 
+sleep 2
+
+echo "Now we setup the file sharing"
+echo "============================="
 
 
 

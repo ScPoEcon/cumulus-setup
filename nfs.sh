@@ -23,7 +23,7 @@ echo "done starting nfs server"
 
 
 echo "starting nfs clients"
-echo "CAUTION this does not work via SSH"
+echo "CAUTION this does not work via SSH?"
 
 # run on slaves
 declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
