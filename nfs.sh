@@ -41,9 +41,9 @@ do
 	# ssh root@"$i" umount /root/git && umount /root/.julia
 	ssh root@"$i" << EOF
 		echo "adding mounts to fstab"
-		echo -e "\r\n10.20.35.11:/root /root nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-		echo -e "\r\n10.20.35.11:/usr /usr nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-		echo -e "\r\n10.20.35.11:/apps /apps nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo -e "10.20.35.11:/root /root nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo -e "10.20.35.11:/usr /usr nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo -e "10.20.35.11:/apps /apps nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
 		echo "mounting manually now"
 		mount 10.20.35.11:/root /root
 		mount 10.20.35.11:/usr /usr
