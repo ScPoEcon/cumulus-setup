@@ -63,16 +63,14 @@ if [ $(id -u) -eq 0 ]; then
     echo "alias ls='ls --color=auto'"  >> ~/.bashrc
 fi
 
-echo "adding ~/local to your PATH"
-mkdir -p $HOME/local/bin
-echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
-
 sleep 3
 
 apt-get update
 apt install git
+apt install htop
 # compilers	
 apt install gcc
+apt install python
 
 echo ""
 echo "done installing GCC"
@@ -131,11 +129,11 @@ echo "Installing julia and packages"
 echo "+++++++++++++++++++++++++++++"
 echo ""
 # get julia
-cd
 wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz
-mkdir -p apps/julia-0.5
-tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C apps/julia-0.5 --strip-components 1
-ln -s $HOME/apps/julia-0.5/bin/julia /root/local/bin/julia 
+mkdir -p /apps/julia-0.5
+tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C /apps/julia-0.5 --strip-components 1
+ln -s /apps/julia-0.5/bin/julia /root/local/bin/julia 
+rm julia-0.5.1-linux-x86_64.tar.gz
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
                 "FileIO",
                 "DataFrames",
@@ -167,7 +165,7 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
 				Pkg.clone("https://github.com/floswald/MOpt.jl")' | \
-	$HOME/apps/julia-0.5/bin/julia
+	julia
 
 echo ""
 echo "done Installing julia"
@@ -176,21 +174,7 @@ echo ""
 
 sleep 3
 
-echo ""
-echo "Preparing Installing Pyenv"
-echo "++++++++++++++++++"
-echo ""
-apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-# for lxml library
-apt-get install libxml2-dev libxslt1-dev
-echo "you need to execute python.sh next"
-echo "Bye Bye!"
+echo "Done!"
 echo "========================"
 
 
