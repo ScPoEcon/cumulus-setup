@@ -12,6 +12,10 @@ echo -e "/root 10.20.35.6(sync,no_subtree_check)
 /root 10.20.35.7(sync,no_subtree_check) 
 /root 10.20.35.8(sync,no_subtree_check)  
 /root 10.20.35.9(sync,no_subtree_check) 
+/apps 10.20.35.6(sync,no_subtree_check)  
+/apps 10.20.35.7(sync,no_subtree_check) 
+/apps 10.20.35.8(sync,no_subtree_check)  
+/apps 10.20.35.9(sync,no_subtree_check)
 /usr 10.20.35.6(sync,no_subtree_check)  
 /usr 10.20.35.7(sync,no_subtree_check) 
 /usr 10.20.35.8(sync,no_subtree_check)  
@@ -32,15 +36,29 @@ echo "CAUTION this does not work via SSH"
 declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core)
 for i in "${workers[@]}"
 do
-	echo "on worker $i"
+	echo "working on worker $i"
 	# ssh root@"$i" apt install nfs-common
-	ssh root@"$i" umount /root/git && umount /root/.julia
-	ssh root@"$i" echo "10.20.35.11:/root/git /root/git  nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-	ssh root@"$i" echo "10.20.35.11:/usr /usr  nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-	ssh root@"$i" echo "10.20.35.11:/apps /apps  nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-	ssh root@"$i" echo "10.20.35.11:/root/.julia /root/.julia  nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
-	ssh root@"$i" reboot
+	# ssh root@"$i" umount /root/git && umount /root/.julia
+	ssh root@"$i" << EOF
+		echo "adding mounts to fstab"
+		echo -e "\r\n10.20.35.11:/root /root nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo -e "\r\n10.20.35.11:/usr /usr nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo -e "\r\n10.20.35.11:/apps /apps nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0" | cat >> /etc/fstab
+		echo "mounting manually now"
+		mount 10.20.35.11:/root /root
+		mount 10.20.35.11:/usr /usr
+		mkdir -p /apps
+		mount 10.20.35.11:/apps /apps
+		echo "done. "
+	EOF
 	echo "done. rebooting $i"
+	ssh root@"$i" reboot
 done
 
 
+ssh otherhost << EOF
+  ls some_folder; 
+  ./someaction.sh 'some params'
+  pwd
+  ./some_other_action 'other params'
+EOF
