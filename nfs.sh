@@ -56,9 +56,3 @@ do
 done
 
 
-ssh otherhost << EOF
-  ls some_folder; 
-  ./someaction.sh 'some params'
-  pwd
-  ./some_other_action 'other params'
-EOF
