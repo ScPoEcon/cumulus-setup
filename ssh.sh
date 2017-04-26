@@ -23,5 +23,4 @@ do
 	# ssh root@"$i" apt install nfs-common
 	# ssh root@"$i" umount /root/git && umount /root/.julia
 	echo "done"
-EOT
 done
