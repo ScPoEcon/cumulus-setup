@@ -1,7 +1,6 @@
 declare -a workers=(vm4-8core vm5-8core vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
 for i in "${workers[@]}"
 do
-	sleep 2
 	echo "working on worker $i"
 	# ssh root@"$i" apt install nfs-common
 	# ssh root@"$i" umount /root/git && umount /root/.julia
@@ -15,10 +14,13 @@ do
 	mount 10.20.35.11:/apps /apps
 	mount
 	sleep 2
-	echo "done. "
+	echo "done mounting. "
 	echo "adding to /etc/ftabs"
 	echo "10.20.35.11:/root /root nfs rw,auto 0 0" | cat >> /etc/fstab
 	echo "10.20.35.11:/usr/local /usr/local nfs rw,auto 0 0" | cat >> /etc/fstab
 	echo "10.20.35.11:/apps /apps nfs rw,auto 0 0" | cat >> /etc/fstab
+	echo "done with $i. "
+	echo " "
+	echo " "
 EOF
 done
