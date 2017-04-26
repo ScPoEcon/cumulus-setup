@@ -5,6 +5,7 @@ do
 	# ssh root@"$i" apt install nfs-common
 	# ssh root@"$i" umount /root/git && umount /root/.julia
 	ssh root@"$i" /bin/bash << 'EOT'
+		echo "These commands will be run on: $( uname -n )"
 		apt-get install nfs-common
 		echo "mounting now"
 		mount 10.20.35.11:/root /root
