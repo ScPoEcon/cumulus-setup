@@ -5,14 +5,14 @@ do
 	# ssh root@"$i" apt install nfs-common
 	# ssh root@"$i" umount /root/git && umount /root/.julia
 	ssh root@"$i" /bin/bash << 'EOT'
-	echo "These commands will be run on: $( uname -a )"
+	echo "These commands will be run on: $( uname -n )"
 	echo "They are executed by: $( whoami )"
 	echo "doing stuff now"
 	mkdir -p testing
 	cd testing
 	touch test.file
-	echo "put that into it" | cat >> test.file
-	echo "see whats in it"
+	echo "this is the file content" | cat >> test.file
+	echo "see whats in it:"
 	cat test.file
 	cd ..
 	rm -rf testing
