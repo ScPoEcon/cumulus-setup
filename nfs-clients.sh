@@ -12,8 +12,7 @@ do
 	mount 10.20.35.11:/usr/local /usr/local
 	mkdir -p /apps
 	mount 10.20.35.11:/apps /apps
-	mount
-	sleep 2
+	sleep 1
 	echo "done mounting. "
 	echo "adding to /etc/ftabs"
 	echo "10.20.35.11:/root /root nfs rw,auto 0 0" | cat >> /etc/fstab
@@ -22,5 +21,6 @@ do
 	echo "done with $i. "
 	echo " "
 	echo " "
-EOF
+	sleep 1
+EOT
 done

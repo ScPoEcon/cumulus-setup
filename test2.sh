@@ -1,4 +1,4 @@
-declare -a workers=(vm3-8core vm4-8core vm5-8core)
+declare -a workers=(vm4-8core vm5-8core vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
 for i in "${workers[@]}"
 do
 	echo "working on worker $i"
@@ -12,7 +12,6 @@ do
 	mount 10.20.35.11:/usr/local /usr/local
 	mkdir -p /apps
 	mount 10.20.35.11:/apps /apps
-	mount
 	echo "They are executed by: $( whoami )"
 	echo "doing stuff now"
 	mkdir -p testing
@@ -24,5 +23,7 @@ do
 	cd ..
 	rm -rf testing
 	echo "done"
+	echo ""
+	echo ""
 EOT
 done
