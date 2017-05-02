@@ -15,7 +15,7 @@
 # done
 
 
-declare -a workers=(vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
+declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
 for i in "${workers[@]}"
 do
 	echo "working on worker $i"

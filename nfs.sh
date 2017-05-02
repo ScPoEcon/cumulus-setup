@@ -6,11 +6,12 @@
 # after https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-16-04
 
 # run on master
-apt install nfs-kernel-server
+apt install --yes nfs-kernel-server
 # this will export the directory /root to all nodes listed
 rm -rf /etc/exports
 echo -e "
 /root      10.20.35.12/19.19.19.0(rw,sync,no_root_squash)
+/usr       10.20.35.12/19.19.19.0(ro,sync,no_root_squash)
 /apps      10.20.35.12/19.19.19.0(ro,sync,no_root_squash)" | \
 cat >> /etc/exports
 
