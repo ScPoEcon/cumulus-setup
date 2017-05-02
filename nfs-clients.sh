@@ -16,7 +16,7 @@ do
 	mount 10.20.35.20:/root /root
 	mount 10.20.35.20:/usr /usr
 	mkdir -p /etc/R
-	mount 10.20.35.20:/etc/R /usr/etc/R
+	mount 10.20.35.20:/etc/R /etc/R
 	mkdir -p /apps
 	mount 10.20.35.20:/apps /apps
 	sleep 1
