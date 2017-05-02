@@ -105,13 +105,6 @@ apt-get install --yes gfortran
 apt-get install --yes python
 apt-get install --yes autojump
 
-
-echo '
-if [ "$(hostname)" == "master" ]; then
-   . /usr/share/autojump/autojump.sh
-fi' >> ~/.bashrc
-
-
 sleep 2
 
 apt-get install --yes python

@@ -12,6 +12,7 @@ rm -rf /etc/exports
 echo -e "
 /root      10.20.35.12/19.19.19.0(rw,sync,no_root_squash)
 /usr       10.20.35.12/19.19.19.0(ro,sync,no_root_squash)
+/etc/R       10.20.35.12/19.19.19.0(ro,sync,no_root_squash)
 /apps      10.20.35.12/19.19.19.0(ro,sync,no_root_squash)" | \
 cat >> /etc/exports
 
