@@ -46,7 +46,7 @@ echo "  - prompt.sh: install fancy git-aware shell "
 echo ""
 echo ""
 echo "NOTICE:"
-echo "you need to say yes (Y) a couple of times during the process"
+echo "I am saying yes (Y) a couple of times for you during the process"
 echo ""
 echo ""
 
@@ -92,26 +92,27 @@ sleep 3
 apt-get update
 apt-get install --yes git
 apt-get install --yes htop
-apt-get install --yes install hdf5-tools
+apt-get install --yes hdf5-tools
 # compilers	
 apt-get install --yes gcc
+echo ""
+echo "done installing GCC"
+echo "++++++++++++++++++"
+echo ""
+
 apt-get install --yes python
-apt-get install --yes install autojump
+apt-get install --yes autojump
 
 
 echo 'if [ "$(hostname)" == "master" ]; then
    . /usr/share/autojump/autojump.sh
 fi' >> ~/.bashrc
 
-echo ""
-echo "done installing GCC"
-echo "++++++++++++++++++"
-echo ""
 
 sleep 2
 
 apt-get install --yes python
-apt-get install --yes install autojump
+apt-get install --yes autojump
 echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 
