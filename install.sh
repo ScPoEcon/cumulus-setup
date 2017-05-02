@@ -124,7 +124,7 @@ wget https://cran.rstudio.com/src/base/R-3/R-3.4.0.tar.gz
 mkdir -p /apps/R-3.4
 tar -xzf R-3.4.0.tar.gz 
 cd R-3.4.0
-./configure --prefix=/apps/R-3.4
+./configure --prefix=/apps/R-3.4 --enable-R-shlib
 make && make install
 echo 'export PATH="/apps/R-3.4/bin:$PATH"' >> ~/.bashrc
 
