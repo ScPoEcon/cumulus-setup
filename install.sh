@@ -8,7 +8,7 @@
 # manually install git and clone this repo. execute those commands:
 
 # apt-get update
-# apt-get --yes --force-yes git
+# apt-get --yes git
 # cd
 # mkdir git
 # cd git
@@ -90,13 +90,13 @@ cat prompt.sh >> ~/.bashrc
 sleep 3
 
 apt-get update
-apt-get --yes --force-yes git
-apt-get --yes --force-yes htop
-apt-get --yes --force-yes install hdf5-tools
+apt-get --yes git
+apt-get --yes htop
+apt-get --yes install hdf5-tools
 # compilers	
-apt-get --yes --force-yes gcc
-apt-get --yes --force-yes python
-apt-get --yes --force-yes install autojump
+apt-get --yes gcc
+apt-get --yes python
+apt-get --yes install autojump
 
 
 echo 'if [ "$(hostname)" == "master" ]; then
@@ -110,8 +110,8 @@ echo ""
 
 sleep 2
 
-apt-get --yes --force-yes python
-apt-get --yes --force-yes install autojump
+apt-get --yes python
+apt-get --yes install autojump
 echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 
@@ -119,10 +119,20 @@ echo ""
 echo "Installing R"
 echo "++++++++++++++++++"
 echo ""
-# install R
-echo "deb http://cran.rstudio.com/bin/linux/ubuntu yakkety/" | \
-    tee -a /etc/apt/sources.list
-apt-get --yes --force-yes install r-base
+# install R to custom location - better to manage modules environment at some point
+wget https://cran.rstudio.com/src/base/R-3/R-3.4.0.tar.gz
+mkdir -p /apps/R-3.4
+tar -xzf R-3.4.0.tar.gz 
+cd R-3.4.0
+./configure --prefix=/apps/R-3.4
+make && make install
+echo 'export PATH="/apps/R-3.4/bin:$PATH"' >> ~/.bashrc
+
+# ubuntu package installation  for R
+# echo "deb http://cran.rstudio.com/bin/linux/ubuntu yakkety/" | \
+#     tee -a /etc/apt/sources.list
+# apt-get --yes install r-base
+
 # install R packages
 echo 'requirements = c("ggplot2",
                          "data.table",
@@ -149,7 +159,7 @@ echo 'requirements = c("ggplot2",
                function(x) {
                     if (!x %in% installed.packages()[,"Package"])
                         install.packages(x, repos="http://cran.r-project.org")})' | \
-  R --no-save
+  /apps/R-3.4/bin/R --no-save
 
 echo ""
 echo "done Installing R"
