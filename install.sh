@@ -8,7 +8,7 @@
 # manually install git and clone this repo. execute those commands:
 
 # apt-get update
-# apt install git
+# apt-get --yes --force-yes git
 # cd
 # mkdir git
 # cd git
@@ -90,13 +90,13 @@ cat prompt.sh >> ~/.bashrc
 sleep 3
 
 apt-get update
-apt install git
-apt install htop
-apt-get install hdf5-tools
+apt-get --yes --force-yes git
+apt-get --yes --force-yes htop
+apt-get --yes --force-yes install hdf5-tools
 # compilers	
-apt install gcc
-apt install python
-apt-get install autojump
+apt-get --yes --force-yes gcc
+apt-get --yes --force-yes python
+apt-get --yes --force-yes install autojump
 
 
 echo 'if [ "$(hostname)" == "master" ]; then
@@ -110,8 +110,8 @@ echo ""
 
 sleep 2
 
-apt install python
-apt-get install autojump
+apt-get --yes --force-yes python
+apt-get --yes --force-yes install autojump
 echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 
@@ -122,7 +122,7 @@ echo ""
 # install R
 echo "deb http://cran.rstudio.com/bin/linux/ubuntu yakkety/" | \
     tee -a /etc/apt/sources.list
-apt-get install r-base
+apt-get --yes --force-yes install r-base
 # install R packages
 echo 'requirements = c("ggplot2",
                          "data.table",
