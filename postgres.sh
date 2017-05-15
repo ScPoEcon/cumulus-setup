@@ -1,6 +1,6 @@
 
 # install postgresql
-apt-get install \
+apt-get --yes --forces-yes install \
       build-essential \
       postgis \
       postgresql \

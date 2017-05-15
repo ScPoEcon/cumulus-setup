@@ -1,11 +1,54 @@
 
 # Cumulus Setup
 
-**What is Cumulus**? This is the virtual datacenter of [USPC (Universite Sorbonne Paris Cite)](http://uspc.fr). The dept of Economics has access to this resource.  
+**What is Cumulus**? This is the virtual datacenter of [USPC (Universite Sorbonne Paris Cite)](http://uspc.fr). The dept of Economics at ScPo has got access to this resource. The official help site is [here](https://cumulus.parisdescartes.fr/help/).
 
-As is custom in many datacenters, you are provided with an **empty** computer. There is nothing but a operating system on it.  
+These instructions aim at setting up your account and letting you connect to your Virtual Machines (VMs). The repository also contains several scripts which help installing your software.
 
-These instructions aim at setting up your account and letting you connect to your VMs. The repository also contains several scripts which help installing your software.
+## Technical Specifications
+
+You can choose machines of several sizes. The most powerful machine is
+
+* Intel(R) Xeon(R) CPU E5-2690 v3 @ 2.60GHz
+* 8 cores
+* 8 GB ram  
+* There is a very large amount of disk storage space available.
+* Given that each VM has an IP address, you can build your own cluster (i.e. you can connect machines together to form a large number of workers in a master-worker setup)
+
+## Potential Uses of this system
+
+Any kind of computation-heavy task, like:
+
+* High throughput computing 
+* Parallel computations
+* Monte Carlo experiments
+* Solving and estimating large structural models
+
+This is not a very good system if you want to load a very large dataset into memory to perform analysis on it, given that you only get 8GB per machine.
+
+
+## Types of Users
+
+There are 2 possible ways to use this system:
+
+1. **Power User**: you are able to manage your VM on your own, i.e. you are the *owner* of the VM. This means you have to install everything yourself. I will provide only minimal assistance to power users. 
+2. **Normal User**: I create a user account on a VM for you and install all software in the script `install.sh` contained within this repository: 
+	* I create a unix ubuntu 16 VM for you. 
+	* I cannot guarantee any level of assistance. I will run the install script for you, but after that, you are on your own. sorry. :-(
+	* If you want another OS (e.g. windows), you will have to declare yourself a power user, as I cannot provide any assistance with that.
+
+### Available Software
+
+As of now, I install for you:
+
+* Gnu Compiler Collection (GCC)
+* Julia 
+* python
+* R
+* PostgreSQL  
+
+In principle you can install anything you want. Notice that you will need an appropriate license for commercial software like `matlab` or `stata`. I will **not** provide assistance with installation of commercial software.
+
 
 ## Getting an Account
 
@@ -29,13 +72,16 @@ It is essential that you follow **each** of those steps:
 1. Choose a template for an OS. If you want to use my install script, choose Ubuntu 16.10 (on page 2)
 1. Choose your preferred machine capacity
 1. Choose a network interface. There is only one choice, but you need to click on it.
-1. Give the VM a sensible, short name (both at top and bottom of this page). Josephine could call hers *jose-1* for example. no special signs please (like @ or ?!\|{} etc)
+1. Give the VM a sensible, short name (both at top and bottom of this page). Joe Bloggs would call his `joe_b` for example. 
 1. click on create
 
-### Using a VM for the First Time 
+## Power Users: Using a VM for the First Time 
+
+This section only applies to **power users**.
 
 * On your cumulus dashboard, you should see your running machine now. Click on the name of the VM to open it.
 * Click on the little blue screen symbol to open a popup window with a console on that machine.
+	* **Caution**: This console has an `AZERTY` (i.e. *French*) keyboard.
 * login as `root`.
 * you are prompted to choose a password. Do so.
 * That's it. you are now the admin of that VM. You can install software and use it for your work.
@@ -55,8 +101,8 @@ ssh your_user_name@brome.lab.parisdescartes.fr -p 2222
 
 * I need to give you `your_user_name` for this to work.
 * Once you are on the login node, you need to connect to your VMs to start using them for your work.
-* If your VM has IP `10.20.35.87`, you would now type `ssh root@10.20.35.87`
-* Alternatively, if you gave it a name before, you could do `ssh root@jose-1`
+* If your VM has IP `10.20.35.87`, you would now type `ssh your_user@10.20.35.87`
+* Joe could do `ssh joe@joe_b` (after I set up user `joe` on machine `joe_b` for him)
 
 ### Hopping through the login node
 
@@ -74,7 +120,7 @@ This command does that for you:
 
 ```
 ssh-keygen -t rsa  # just hit enter, no password
-cat ~/.ssh/id_rsa.pub | ssh root@10.20.35.87 'cat >> .ssh/authorized_keys'   # 10.20.35.87 is your VM
+cat ~/.ssh/id_rsa.pub | ssh your_user@10.20.35.87 'cat >> .ssh/authorized_keys'   # 10.20.35.87 is your VM
 ```
 
 
@@ -84,18 +130,18 @@ you need to create or edit the file `~/.ssh/config`:
 
 ```bash
 Host cumlogin
-    User root
+    User your_user
     Hostname brome.lab.parisdescartes.fr
     Port 2222
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_rsa.pub
 
 Host cumulus
-	User root
-	HostName xx.xx.xx.x  # IP of your VM!
+	User your_user
+	HostName xx.xx.xx.x  # put IP of your VM and erase this comment!
 	PreferredAuthentications publickey
 	IdentityFile ~/.ssh/id_rsa.pub
-	ProxyCommand ssh cum-login nc %h %p
+	ProxyCommand ssh cumlogin nc %h %p
 ```
 
 Now if you do `ssh cumulus` on your computer it takes you directly to your compute node, hopping over the login:
@@ -134,13 +180,16 @@ Last login: Wed Apr 19 12:01:27 2017 from 10.20.35.2
 root@vm2:~$ 
 ```
 
-## Installing Software
+## Installing Software (power users only)
 
-1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command:
+1. `ssh` to your VM (**NOT** to the login node!!!!) by using the command (if you have not set up the hopping as above)
+
 	```bash
-	ssh root@"IP_of_my_VM"
+	ssh root@IP_of_my_VM
 	```
+
 	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above). 
+
 1. To start installing software, enter the following lines in the terminal:
 	```bash
 	cd
@@ -151,4 +200,4 @@ root@vm2:~$
 	cd cumulus-setup
 	./install.sh
 	```
-	You will be asked to enter 'Y' several times. When the installation is done, you can check that everything went fine by simply entering 'python' in the terminal.
+	You will be asked to enter `Y` (yes) several times. When the installation is done, you can check that everything went fine by simply entering `python`, or `R` in the terminal.
