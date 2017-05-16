@@ -19,7 +19,7 @@ You can choose machines of several sizes. The most powerful machine is
 
 Any kind of computation-heavy task, like:
 
-* High throughput computing 
+* High throughput computing
 * Parallel computations
 * Monte Carlo experiments
 * Solving and estimating large structural models
@@ -31,9 +31,9 @@ This is not a very good system if you want to load a very large dataset into mem
 
 There are 2 possible ways to use this system:
 
-1. **Power User**: you are able to manage your VM on your own, i.e. you are the *owner* of the VM. This means you have to install everything yourself. I will provide only minimal assistance to power users. 
-2. **Normal User**: I create a user account on a VM for you and install all software in the script `install.sh` contained within this repository: 
-	* I create a unix ubuntu 16 VM for you. 
+1. **Power User**: you are able to manage your VM on your own, i.e. you are the *owner* of the VM. This means you have to install everything yourself. I will provide only minimal assistance to power users.
+2. **Normal User**: I create a user account on a VM for you and install all software in the script `install.sh` contained within this repository:
+	* I create a unix ubuntu 16 VM for you.
 	* I cannot guarantee any level of assistance. I will run the install script for you, but after that, you are on your own. sorry. :-(
 	* If you want another OS (e.g. windows), you will have to declare yourself a power user, as I cannot provide any assistance with that.
 
@@ -42,7 +42,7 @@ There are 2 possible ways to use this system:
 As of now, I install for you:
 
 * Gnu Compiler Collection (GCC)
-* Julia 
+* Julia
 * python
 * R
 * PostgreSQL  
@@ -53,7 +53,7 @@ In principle you can install anything you want. Notice that you will need an app
 ## Getting an Account
 
 * Write me an email explaining in 1 sentence why you need this service. This is more to understand whether it could be useful for you, rather than to restrict access to it. Access is granted exclusively to members of the Department of Economics at SciencesPo Paris.
-* I'll send you an email with your password. 
+* I'll send you an email with your password.
 * Go to [https://cumulus.parisdescartes.fr](https://cumulus.parisdescartes.fr)
 	1. Click on your user name at the top of the page and then on `settings`.
 	1. Click on `change password`. Change it.
@@ -62,7 +62,7 @@ In principle you can install anything you want. Notice that you will need an app
 		* You will be able to login without typing a password. Highly recommended.
 		* To create your SSH key pair, follow [those instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key)
 		* Type `cat ~/.ssh/id_rsa.pub` in your terminal to see your public key. copy and paste this to here.
-	
+
 ## Creating new Virtual Machines (VM)
 
 It is essential that you follow **each** of those steps:
@@ -72,10 +72,10 @@ It is essential that you follow **each** of those steps:
 1. Choose a template for an OS. If you want to use my install script, choose Ubuntu 16.10 (on page 2)
 1. Choose your preferred machine capacity
 1. Choose a network interface. There is only one choice, but you need to click on it.
-1. Give the VM a sensible, short name (both at top and bottom of this page). Joe Bloggs would call his `joe_b` for example. 
+1. Give the VM a sensible, short name (both at top and bottom of this page). Joe Bloggs would call his `joe_b` for example.
 1. click on create
 
-## Power Users: Using a VM for the First Time 
+## Power Users: Using a VM for the First Time
 
 This section only applies to **power users**.
 
@@ -115,7 +115,7 @@ Our setup with firewall + login node is very common. There exists therefore a co
 1. Create an SSH keypair for your user on the login node (see above)
 1. copy the public part of that key to your VM: `scp id_rsa.pub 10.20.35.87:~`
 1. You need to do that on each VM where you want to hop onto.
-  
+
 This command does that for you:
 
 ```
@@ -152,9 +152,9 @@ Now if you do `ssh cumulus` on your computer it takes you directly to your compu
 **************************************************
 
                   W.E.L.C.O.M.E
-               
+
                       on the
- 
+
               ScPo Economics Login Node
 
             to CUMULUS at paris descartes
@@ -177,7 +177,7 @@ New release '17.04' available.
 Run 'do-release-upgrade' to upgrade to it.
 
 Last login: Wed Apr 19 12:01:27 2017 from 10.20.35.2
-root@vm2:~$ 
+root@vm2:~$
 ```
 
 ## Installing Software (power users only)
@@ -188,16 +188,45 @@ root@vm2:~$
 	ssh root@IP_of_my_VM
 	```
 
-	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above). 
+	You will be asked to enter the password that you set up the first time you logged in as root (see the section "Using a VM for the First Time" above).
 
 1. To start installing software, enter the following lines in the terminal:
 	```bash
 	cd
 	mkdir git
 	cd git
-	apt get install git
-	git clone https://github.com/floswald/cumulus-setup.git 
+	apt-get install git
+	git clone https://github.com/floswald/cumulus-setup.git
 	cd cumulus-setup
 	./install.sh
 	```
 	You will be asked to enter `Y` (yes) several times. When the installation is done, you can check that everything went fine by simply entering `python`, or `R` in the terminal.
+
+## Julien's experience
+I have been beta-testing the Cumulus platform. Here are a few comments based on my (limited) experience:
+* I use GitHub to keep track of my projects. If I have a computer-intensive task, I can import it easily on a virtual machine using `git clone`
+* GitHub is not well suited for hosting large files. I use MegaSync for that purpose. One advantage of MegaSync compared to its competitors is that it offers a free account with 50 GB of storage. If you opt for this option, megatools will be needed to download files from your MegaSync account using command lines. This can be done by executing the following commands on your virtual machine:
+	```bash
+	sudo apt-get update
+	sudo apt-get install libtool libglib2.0-dev gobject-introspection libgmp3-dev nettle-dev asciidoc glib-networking openssl libcurl4-openssl-dev libssl-dev
+	cd
+	mkdir megatools
+	cd megatools
+	wget http://megatools.megous.com/builds/megatools-1.9.98.tar.gz
+	zcat megatools-1.9.98.tar.gz > megatools-1.9.98.tar
+	tar -xf megatools-1.9.98.tar
+	cd megatools-1.9.98/
+	./configure
+	make
+	sudo make install
+	```
+A configuration file `~\.megarc` with your credentials have to be created at the root of your virtual machine:
+	```bash
+[Login]
+Username = your@email
+Passsword = yourpassword
+```
+Downloading a folder from your MegaSync account can be done in one line:
+```bash
+megacopy --local your_local_folder --remote /Root/your_MegaSync_folder --download
+```
