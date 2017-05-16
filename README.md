@@ -220,13 +220,13 @@ I have been beta-testing the Cumulus platform. Here are a few comments based on 
 	make
 	sudo make install
 	```
-A configuration file `~\.megarc` with your credentials have to be created at the root of your virtual machine:
+* A configuration file `~\.megarc` with your credentials have to be created at the root of your virtual machine:
 	```bash
-[Login]
-Username = your@email
-Passsword = yourpassword
-```
-Downloading a folder from your MegaSync account can be done in one line:
-```bash
-megacopy --local your_local_folder --remote /Root/your_MegaSync_folder --download
-```
+	[Login]
+	Username = your@email
+	Passsword = yourpassword
+	```
+* Downloading a folder from your MegaSync account can be done in one line:
+	```bash
+	megacopy --local your_local_folder --remote /Root/your_MegaSync_folder --download
+	```
