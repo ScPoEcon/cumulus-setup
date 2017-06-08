@@ -201,3 +201,27 @@ root@vm2:~$
 	./install.sh
 	```
 	You will be asked to enter `Y` (yes) several times. When the installation is done, you can check that everything went fine by simply entering `python`, or `R` in the terminal.
+
+
+## Running Programs in Parallel
+
+This is very software specific. Many languages rely on some external infrastructure to communicate between compute nodes, the best known is probably MPI (message passing interface). C, fortran and R can be parallelized with the help of `MPI`. However, this needs to be installed on all nodes (you need to do that yourself).  
+
+A much easier system is used by julia. it uses passwordless SSH (like above!).  
+
+### Parallel Julia on a single machine?
+
+* I installed julia for you on `shared-master`
+* launch it by typing `/shared/julia-0.5/bin/julia`
+* you can then easily add processes by saying `addprocs(2)` for example
+* however, how to connect multiple machines?
+
+
+### Parallel Julia on multiple machines?
+
+Prerequisites:  
+
+1. We need the same version of julia installed (preferrably in the same location) on all machines.
+1. We must be able to passwordless-SSH into each machine
+
+

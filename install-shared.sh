@@ -113,8 +113,6 @@ apt-get install --yes autojump
 
 sleep 2
 
-apt-get install --yes python
-apt-get install --yes autojump
 echo ". /usr/share/autojump/autojump.sh" >> ~/.bashrc
 
 
@@ -122,52 +120,53 @@ echo ""
 echo "Installing R"
 echo "++++++++++++++++++"
 echo ""
+# custom R install is a PITA! http://pj.freefaculty.org/blog/?p=315
 # install R to custom location - better to manage modules environment at some point
 # apt-get install --yes libreadline6 libreadline6-dev
-# apt-get install --yes zlib1g-dev
-# apt-get install --yes bzip2
-# apt-get install --yes lbzip2
-wget https://cran.rstudio.com/src/base/R-3/R-3.4.0.tar.gz
-mkdir -p /shared/R-3.4
-tar -xzf R-3.4.0.tar.gz 
-cd R-3.4.0
-./configure --prefix=/shared/R-3.4 --enable-R-shlib 
-make && make install
-# echo 'export PATH="/apps/R-3.4/bin:$PATH"' >> ~/.bashrc
+# # apt-get install --yes zlib1g-dev
+# # apt-get install --yes bzip2
+# # apt-get install --yes lbzip2
+# wget https://cran.rstudio.com/src/base/R-3/R-3.4.0.tar.gz
+# mkdir -p /shared/R-3.4
+# tar -xzf R-3.4.0.tar.gz 
+# cd R-3.4.0
+# ./configure --prefix=/shared/R-3.4 --enable-R-shlib --with-x=no
+# make && make install
+# # echo 'export PATH="/apps/R-3.4/bin:$PATH"' >> ~/.bashrc
 
-# ubuntu package installation  for R
-# echo "deb http://cran.rstudio.com/bin/linux/ubuntu yakkety/" | \
-#     tee -a /etc/apt/sources.list
-# apt-get install --yes r-base
-# apt-get install --yes libssl-dev
+# # ubuntu package installation  for R
+# # echo "deb http://cran.rstudio.com/bin/linux/ubuntu yakkety/" | \
+# #     tee -a /etc/apt/sources.list
+# # apt-get install --yes r-base
+# # apt-get install --yes libssl-dev
 
-# install R packages
-echo 'requirements = c("ggplot2",
-                         "data.table",
-                         "Rcpp",
-                         "RcppArmadillo",
-                         "RcppGSL",
-                         "reshape2",
-                         "animation",
-                         "rjson",
-                         "xtable",
-                         "devtools",
-                         "texreg",
-                         "testthat",
-                         "gridR",
-                         "psidR",
-                         "RPostgreSQL",
-                         "sf",
-                         "rgdal",
-                         "sp",
-                         "DBI"
-                         )
+# # install R packages
+# echo 'requirements = c("ggplot2",
+#                          "data.table",
+#                          "Rcpp",
+#                          "RcppArmadillo",
+#                          "RcppGSL",
+#                          "reshape2",
+#                          "animation",
+#                          "rjson",
+#                          "xtable",
+#                          "devtools",
+#                          "texreg",
+#                          "testthat",
+#                          "gridR",
+#                          "psidR",
+#                          "RPostgreSQL",
+#                          "sf",
+#                          "rgdal",
+#                          "sp",
+#                          "DBI"
+#                          )
 
-        sapply(requirements,
-               function(x) {
-                    if (!x %in% installed.packages()[,"Package"])
-                        install.packages(x, repos="http://cran.r-project.org")})' | \
-  /shared/R-3.4/bin/R --no-save
+#         sapply(requirements,
+#                function(x) {
+#                     if (!x %in% installed.packages()[,"Package"])
+#                         install.packages(x, repos="http://cran.r-project.org")})' | \
+#   /shared/R-3.4/bin/R --no-save
 
 echo ""
 echo "done Installing R"
@@ -182,9 +181,9 @@ echo "Installing julia and packages"
 echo "+++++++++++++++++++++++++++++"
 echo ""
 # get julia
-wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz
+wget https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz
 mkdir -p /shared/julia-0.5
-tar -xzf julia-0.5.1-linux-x86_64.tar.gz -C /apps/julia-0.5 --strip-components 1
+tar -xzf julia-0.5.2-linux-x86_64.tar.gz -C /shared/julia-0.5 --strip-components 1
 ln -s /apps/julia-0.5/bin/julia $HOME/local/bin/julia 
 rm julia-0.5.1-linux-x86_64.tar.gz
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
