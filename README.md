@@ -243,4 +243,10 @@ Prerequisites:
 1. We need the same version of julia installed (preferrably in the same location) on all machines.
 1. We must be able to passwordless-SSH into each machine
 
+If those are met:
+
+```julia
+# on master
+addprocs([("shared2",3)])
+
 
