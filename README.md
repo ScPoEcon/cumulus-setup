@@ -14,6 +14,7 @@ You can choose machines of several sizes. The most powerful machine is
 * 8 GB ram  
 * There is a very large amount of disk storage space available.
 * Given that each VM has an IP address, you can build your own cluster (i.e. you can connect machines together to form a large number of workers in a master-worker setup)
+* comment on **quota**
 
 ## Potential Uses of this system
 
@@ -24,7 +25,14 @@ Any kind of computation-heavy task, like:
 * Monte Carlo experiments
 * Solving and estimating large structural models
 
-This is not a very good system if you want to load a very large dataset into memory to perform analysis on it, given that you only get 8GB per machine.
+This is not a very good system if you want to load a very large dataset into memory to perform analysis on it, given that you only get 8GB per machine.  
+
+
+### Other potential systems for you
+
+* [MAGI](https://magi.univ-paris13.fr). 184 core cluster, SLURM managed.
+* [http://www.huma-num.fr](http://www.huma-num.fr). Storage and computation support. 
+* [Amazon](https://aws.amazon.com). DIY.
 
 
 ## Types of Users
@@ -36,6 +44,8 @@ There are 2 possible ways to use this system:
 	* I create a unix ubuntu 16 VM for you. 
 	* I cannot guarantee any level of assistance. I will run the install script for you, but after that, you are on your own. sorry. :-(
 	* If you want another OS (e.g. windows), you will have to declare yourself a power user, as I cannot provide any assistance with that.
+
+**Related**: We probably want to avoid that each user has to create his/her own cluster. We will work with a very small cluster at the end of this tutorial.
 
 ### Available Software
 
@@ -62,6 +72,15 @@ In principle you can install anything you want. Notice that you will need an app
 		* You will be able to login without typing a password. Highly recommended.
 		* To create your SSH key pair, follow [those instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key)
 		* Type `cat ~/.ssh/id_rsa.pub` in your terminal to see your public key. copy and paste this to here.
+
+## First Things First: Unix, SSH, Users
+
+* You can create windows machines. I will not talk about that, however.
+* Some basic unix: 
+	* What's a [shell](https://en.wikipedia.org/wiki/Unix_shell)? What is [bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)). What's a session, what are environment variables.
+	* Remote connections. [SSH](https://en.wikipedia.org/wiki/Secure_Shell)
+	* A typical user account on (Ubuntu) Unix
+		* permissions: who can read, write, execute?
 	
 ## Creating new Virtual Machines (VM)
 
