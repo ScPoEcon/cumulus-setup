@@ -70,7 +70,7 @@ In principle you can install anything you want. Notice that you will need an app
 	1. Click on `update SSH key`.
 		* copy and paste your public SSH key(s) into the text field and click `update SSH key`.
 		* You will be able to login without typing a password. Highly recommended.
-		* To create your SSH key pair, follow [those instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key)
+		* To create your SSH key pair, follow [those instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#generating-a-new-ssh-key). **(Be sure to supply the same e-mail associated to your Cumulus account. Also, be careful not to erase other keys if you have others.)** 
 		* Type `cat ~/.ssh/id_rsa.pub` in your terminal to see your public key. copy and paste this to here.
 
 ## First Things First: Unix, SSH, Users
@@ -99,20 +99,20 @@ It is essential that you follow **each** of those steps:
 This section only applies to **power users**.
 
 * On your cumulus dashboard, you should see your running machine now. Click on the name of the VM to open it.
-* Click on the little blue screen symbol to open a popup window with a console on that machine.
-	* **Caution**: This console has an `AZERTY` (i.e. *French*) keyboard.
+* Click on the little blue screen symbol to open a popup window with a console on that machine (be patient, this takes time to show up... it also takes time to become functional, so if it gives a connection error, try waiting).
+	* **Caution**: This console has an `AZERTY` (i.e. *French*) keyboard... for some people, and `QWERTY` for others, so check!
 * login as `root`.
 * you are prompted to choose a password. Do so.
 * That's it. you are now the admin of that VM. You can install software and use it for your work.
 
 ## Connecting to the datacenter and your VM
-
+(NOTE: exit ssh connections using `exit`)
 * You can connect to your machines via SSH from your computer. You must have completed the above step beforehand.
 * Your VM has an IP address under which is it reachable **from within the datacenter**.
 * Your VM is **not** reachable directly from the internet.
 * You must pass through the **login node** in order to reach your VM.
 * The login node is behind port `2222` on our firewall to this datacenter.
-* You can reach the login node by typing
+* You can reach the login node by typing (replace `your_user_name` with your username provided by Florian)
 
 ```bash
 ssh your_user_name@brome.lab.parisdescartes.fr -p 2222
@@ -120,7 +120,7 @@ ssh your_user_name@brome.lab.parisdescartes.fr -p 2222
 
 * I need to give you `your_user_name` for this to work.
 * Once you are on the login node, you need to connect to your VMs to start using them for your work.
-* If your VM has IP `10.20.35.87`, you would now type `ssh your_user@10.20.35.87`
+* If your VM has IP `10.20.35.87`, you would now type `ssh your_user@10.20.35.87` (Replace `your_user` with the user you created on your virtual machine. For example `root`.)
 * Joe could do `ssh joe@joe_b` (after I set up user `joe` on machine `joe_b` for him)
 
 ### Hopping through the login node
@@ -149,18 +149,18 @@ you need to create or edit the file `~/.ssh/config`:
 
 ```bash
 Host cumlogin
-    User your_user
+    User your_user_name_provided_by_Florian
     Hostname brome.lab.parisdescartes.fr
     Port 2222
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_rsa.pub
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
 
 Host cumulus
-	User your_user
-	HostName xx.xx.xx.x  # put IP of your VM and erase this comment!
-	PreferredAuthentications publickey
-	IdentityFile ~/.ssh/id_rsa.pub
-	ProxyCommand ssh cumlogin nc %h %p
+    User your_user_name_created_on_vm
+    HostName xx.xx.xx.x  # put IP of your VM and erase this comment!
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa
+    ProxyCommand ssh cumlogin nc %h %p
 ```
 
 Now if you do `ssh cumulus` on your computer it takes you directly to your compute node, hopping over the login:
