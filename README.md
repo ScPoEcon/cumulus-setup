@@ -120,8 +120,7 @@ ssh your_user_name@brome.lab.parisdescartes.fr -p 2222
 
 * I need to give you `your_user_name` for this to work.
 * Once you are on the login node, you need to connect to your VMs to start using them for your work.
-* If your VM has IP `10.20.35.87`, you would now type `ssh your_user@10.20.35.87`
-* Joe could do `ssh joe@joe_b` (after I set up user `joe` on machine `joe_b` for him)
+* If your VM has IP `10.20.35.87`, after logging in to `brome.lab.parisdescartes.fr` you would type `ssh your_user@10.20.35.87`
 
 ### Hopping through the login node
 
