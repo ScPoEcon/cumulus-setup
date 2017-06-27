@@ -6,7 +6,7 @@ echo ""
 echo "Preparing Installing Pyenv"
 echo "++++++++++++++++++"
 echo ""
-apt-get --yes --force-yes install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+apt-get --yes install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv

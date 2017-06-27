@@ -131,15 +131,19 @@ Our setup with firewall + login node is very common. There exists therefore a co
 
 #### Prepare the server side
 
-1. Create an SSH keypair for your user on the login node (see above)
-1. copy the public part of that key to your VM: `scp id_rsa.pub 10.20.35.87:~`
+1. copy the public part of your SSH key to your to the login node: `scp id_rsa.pub 10.20.35.87:~`
+1. From there, copy the public part of your SSH key to your to VM
 1. You need to do that on each VM where you want to hop onto.
   
 This command does that for you:
 
 ```
-ssh-keygen -t rsa  # just hit enter, no password
-cat ~/.ssh/id_rsa.pub | ssh your_user@10.20.35.87 'cat >> .ssh/authorized_keys'   # 10.20.35.87 is your VM
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"  # check in ~/.ssh if you don't have a key already!
+cat ~/.ssh/id_rsa.pub | ssh your_user@brome.lab.parisdescartes.fr -p 2222 'cat >> .ssh/authorized_keys'   # copy your key to the login node
+# login to the login node
+ssh your_user@brome.lab.parisdescartes.fr -p 2222
+# copy your key to the VM
+cat ~/.ssh/authorized_keys | ssh your_user@IP.OF.YOUR.VM 'cat >> .ssh/authorized_keys'   # copy from the login node to your VM
 ```
 
 
