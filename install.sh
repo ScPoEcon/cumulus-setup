@@ -224,11 +224,12 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				"StatsFuns",
 				"Dierckx",
 				"DocOpt",
+				"FactCheck",
 				"ForwardDiff"]);
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
 				Pkg.clone("https://github.com/floswald/MOpt.jl");
-				Pkg.clone("https://github.com/RJDennis/SmolyakApprox.jl);
+				Pkg.clone("https://github.com/RJDennis/SmolyakApprox.jl");
 				Pkg.clone("https://github.com/mrxiaohe/RobustStats.jl")
 				' | \
 	/apps/julia-0.6/bin/julia

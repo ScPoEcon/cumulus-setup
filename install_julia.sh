@@ -1,9 +1,17 @@
+echo "++++++++++++++++++++++++++++++++++	"
+echo "Installing julia v0.6 and packages"
+echo "++++++++++++++++++++++++++++++++++	"
+echo ""
 # get julia v0.6
+echo "Downloading"
 wget https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.1-linux-x86_64.tar.gz
+echo "Creating directory"
 mkdir -p /apps/julia-0.6
+echo "Unpacking"
 tar -xzf julia-0.6.1-linux-x86_64.tar.gz -C /apps/julia-0.6 --strip-components 1
-#ln -sf /apps/julia-0.6/bin/julia $HOME/local/bin/julia 
-ln -sf /apps/julia-0.6/bin/julia /usr/bin/julia 
+echo "Creating Symlink"
+ln -sf /apps/julia-0.6/bin/julia $HOME/local/bin/julia 
+echo "Cleaning"
 rm julia-0.6.1-linux-x86_64.tar.gz
 
 echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
@@ -41,11 +49,15 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				"Calculus",
 				"StatsFuns",
 				"Dierckx",
-				"GaussianMixtures",
-				"DocOpt"]);
+				"DocOpt",
+				"FactCheck",
+				"ForwardDiff"]);
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
-				Pkg.clone("https://github.com/floswald/MOpt.jl")' | \
+				Pkg.clone("https://github.com/floswald/MOpt.jl");
+				Pkg.clone("https://github.com/RJDennis/SmolyakApprox.jl");
+				Pkg.clone("https://github.com/mrxiaohe/RobustStats.jl")
+				' | \
 	/apps/julia-0.6/bin/julia
 
 echo ""
