@@ -25,6 +25,8 @@ Any kind of computation-heavy task, like:
 * Monte Carlo experiments
 * Solving and estimating large structural models
 
+**caveat**: the system is not build to support large scale parallel jobs, which require a lot of communication between compute nodes. The interconnect between nodes is slow. If you need a real cluster, consider MAGI or commercial services like AWS and google cloud (both free for a year).
+
 This is not a very good system if you want to load a very large dataset into memory to perform analysis on it, given that you only get 8GB per machine.  
 
 
