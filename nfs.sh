@@ -10,13 +10,13 @@ apt install --yes nfs-kernel-server
 # this will export the directory /root to all nodes listed
 rm -rf /etc/exports
 echo -e "
-/root      10.20.35.12/19.19.19.0(rw,sync,no_root_squash)
+/home/      10.20.35.12/19.19.19.0(rw,sync,no_root_squash)
 /usr       10.20.35.12/19.19.19.0(ro,sync,no_root_squash)
 /etc/R       10.20.35.12/19.19.19.0(ro,sync,no_root_squash)
 /apps      10.20.35.12/19.19.19.0(ro,sync,no_root_squash)" | \
 cat >> /etc/exports
 
-exportfs -a
+exportfs -ra
 
 echo "starting nfs server"
 systemctl start nfs-kernel-server.service

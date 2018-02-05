@@ -13,7 +13,7 @@ do
 	echo "These commands will be run on: $( uname -n )"
 	apt-get --yes install nfs-common
 	echo "mounting now"
-	mount 10.20.35.20:/root /root
+	mount 10.20.35.20:/home/ /home/
 	mount 10.20.35.20:/usr /usr
 	mkdir -p /etc/R
 	mount 10.20.35.20:/etc/R /etc/R
