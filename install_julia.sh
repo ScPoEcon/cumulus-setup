@@ -39,7 +39,7 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				"NLsolve",
 				"NLopt",
 				"ClusterManagers",
-				"PyPlot",
+				"Plots",
 				"Query",
 				"CompEcon",
 				"QuantEcon",
@@ -54,7 +54,7 @@ echo 'ENV["PYTHON"]=""; Pkg.add.(["JSON",
 				"ForwardDiff"]);
 				Pkg.clone("https://github.com/floswald/ApproXD.jl");
 				Pkg.clone("https://github.com/floswald/Copulas.jl");
-				Pkg.clone("https://github.com/floswald/MOpt.jl");
+				Pkg.clone("https://github.com/floswald/MomentOpt.jl");
 				Pkg.clone("https://github.com/RJDennis/SmolyakApprox.jl");
 				Pkg.clone("https://github.com/mrxiaohe/RobustStats.jl")
 				' | \
@@ -64,4 +64,26 @@ echo ""
 echo "done Installing julia"
 echo "++++++++++++++++++"
 echo ""
+
+echo ""
+echo "Getting PyPlot ready"
+echo "+++++++++++++++++++++"
+echo ""
+
+sudo apt install python-pip
+export LC_ALL=C
+pip install --user matplotlib
+
+#necessary if running this script as sudo
+cd 
+sudo chown -R $USER .julia
+
+
+echo 'ENV["PYTHON"]=""; Pkg.build("PyCall")' | \
+	/apps/julia-0.6/bin/julia
+
+alias julia="$HOME/local/bin/julia"
+
+
+
 
