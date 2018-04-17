@@ -4,23 +4,18 @@
 # mounting /usr only for the R installation, but that also requires /etc/R!
 
 
-declare -a workers=(vm3-8core vm4-8core vm5-8core vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
-# declare -a workers=(vm6-8core vm7-8core vm8-8core vm9-8core vm10-8core)
+declare -a workers=(m2 m3 m4 m5 m6 m7 m8 m9 m10)
 for i in "${workers[@]}"
 do
 	echo "going to worker $i now"
-	ssh root@"$i" /bin/bash << 'EOT'
+	ssh floswald@"$i" /bin/bash << 'EOT'
 	echo "These commands will be run on: $( uname -n )"
 	apt-get --yes install nfs-common
 	echo "mounting now"
-	mount 10.20.35.20:/home/ /home/
-	mount 10.20.35.20:/usr /usr
-	mkdir -p /etc/R
-	mount 10.20.35.20:/etc/R /etc/R
-	mkdir -p /opt/R
-	mount 10.20.35.20:/opt/R /opt/R
-	mkdir -p /apps
-	mount 10.20.35.20:/apps /apps
+	mount 10.20.35.34:/home /home
+	# mount 10.20.35.34:/usr /usr
+	# mkdir -p /etc/R
+	# mount 10.20.35.34:/etc/R /etc/R
 	sleep 1
 	echo "done mounting. "
 	# echo "adding to /etc/ftabs"
