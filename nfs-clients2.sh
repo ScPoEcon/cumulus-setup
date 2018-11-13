@@ -4,7 +4,7 @@
 # mounting /usr only for the R installation, but that also requires /etc/R!
 
 
-declare -a workers=(10.20.35.1 10.20.35.21 10.20.35.26 10.20.35.27 10.20.35.30 10.20.35.31 10.20.35.32 10.20.35.33 10.20.35.34 10.20.35.35 10.20.35.36)
+declare -a workers=(10.20.35.11 10.20.35.21 10.20.35.26 10.20.35.27 10.20.35.30 10.20.35.31 10.20.35.32 10.20.35.33 10.20.35.34 10.20.35.35 10.20.35.36)
 for i in "${workers[@]}"
 do
 	echo "going to worker $i now"
